@@ -5,32 +5,12 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-  
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+    # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  sync:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: "npm"
+      - run: git pull origin main
       - run: npm ci
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v2.0.1
-        with:
-          envkey_WEBHOOKURL: ${{ secrets.WEBHOOKURL }}
-          envkey_BOTTOKEN: ${{ secrets.BOTTOKEN }}
-          envkey_PORT: ${{ secrets.PORT }}
-      - run: npm install pm2@latest -g #install pm2 global
-      - run: pm2 -V #check pm2 version
-      - run: pm2 list #check pm2 list
-      #running pm2 in mode cluster and --watch set to auto restart if lillith.js have changes.
-      - run: pm2 start -f lillith.js --watch -i max
-        
+    
