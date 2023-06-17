@@ -1,26 +1,27 @@
 {
-  "name": "Webex-Bot-Starter",
+  "name": "lillith",
   "version": "1.0.0",
-  "description": "Starter template for creating a Webex Teams bot",
+  "description": "A webex bot for delivering Diablo 4 content to you",
   "main": "index.js",
   "scripts": {
     "start": "npm install && node --use_strict index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tbd/webexbotstarter.git"
+    "url": "git+https://github.com/dangoodie/lillith.git"
   },
   "keywords": [
     "Cisco",
     "Webex",
-    "webex-bot-framework"
+    "webex-bot-framework",
+    "Diablo 4"
   ],
-  "author": "Phil Bellanti",
-  "license": "ISC",
+  "author": "Daniel Gooden",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tbd/webexbotstarter/issues"
+    "url": "https://github.com/dangoodie/lillith/issues"
   },
-  "homepage": "https://github.com/tbd/webexbotstarter#readme",
+  "homepage": "https://github.com/dangoodie/lillith/blob/main/README.md",
   "dependencies": {
     "body-parser": "^1.15.2",
     "dotenv": "^16.0.3",
