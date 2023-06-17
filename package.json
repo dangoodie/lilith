@@ -4,7 +4,7 @@
   "description": "A webex bot for delivering Diablo 4 content to you",
   "main": "index.js",
   "scripts": {
-    "start": "npm install && node --use_strict index.js"
+    "start": "npm install && node --use_strict lillith.js"
   },
   "repository": {
     "type": "git",
