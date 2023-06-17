@@ -21,14 +21,16 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
-        env:
-          WEBHOOKURL: ${{ secrets.WEBHOOKURL }}
-          BOTTOKEN: ${{ secrets.BOTTOKEN }}
-          PORT: ${{ secrets.PORT }}
       - run: npm ci
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_WEBHOOKURL: ${{ secrets.WEBHOOKURL }}
+          envkey_BOTTOKEN: ${{ secrets.BOTTOKEN }}
+          envkey_PORT: ${{ secrets.PORT }}
       - run: npm install pm2@latest -g #install pm2 global
       - run: pm2 -V #check pm2 version
       - run: pm2 list #check pm2 list
       #running pm2 in mode cluster and --watch set to auto restart if index.js have changes.
-      - run: pm2 start index.js --watch -i max
-
+      - run: pm2 start index.js --watch -if max
+        
