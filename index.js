@@ -114,13 +114,20 @@ framework.hears(
         method: "GET",
       }
     )
-    .then(response => response.json())
-    .then(jsonData => console.log(jsonData))
+      .then((response) => response.json())
+      .then(
+        (jsonData) =>
+          (tweetText =
+            jsonData.data.user.result.timeline_v2.timeline.instructions[1]
+              .entries[0].content.itemContent.tweet_results.result.legacy
+              .full_text)
+      );
+    console.log(tweetText);
+    bot.say(tweetText);
   },
   "**world boss**: (get the most upt to date world boss info)",
   0
 );
-
 
 /* On mention with bot data 
 ex User enters @botname 'space' phrase, the bot will provide details about that particular space
@@ -215,7 +222,6 @@ framework.hears(
   0
 );
 
-
 /* On mention with command
 ex User enters @botname help, the bot will write back in markdown
  *
@@ -230,7 +236,11 @@ framework.hears(
       .say(`Hello ${trigger.person.displayName}.`)
       //    .then(() => sendHelp(bot))
       .then(() => bot.say("markdown", framework.showHelp()))
-      .then(() => bot.say(`Lilith has been hacked together by Daniel Gooden -\nhttps://www.github.com/dangoodie`))
+      .then(() =>
+        bot.say(
+          `Lilith has been hacked together by Daniel Gooden -\nhttps://www.github.com/dangoodie`
+        )
+      )
       .catch((e) => console.error(`Problem in help hander: ${e.message}`));
   },
   "**help**: (what you are reading now)",
