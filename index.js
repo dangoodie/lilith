@@ -117,7 +117,7 @@ async function getWorldBossLatest() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const jsonData = response.json;
-    fs.writeFileSync("data.json", JSON.stringify(jsonData));
+    fs.writeFile("data.json", JSON.stringify(jsonData));
     console.log(JSON.stringify(jsonData));
     const tweetText =
       jsonData.data.data.user.result.timeline_v2.timeline.instructions[1].entries[0]
