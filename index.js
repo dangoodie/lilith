@@ -88,11 +88,13 @@ framework.on("log", (msg) => {
 // was specified, in which case, only the handler(s) with the lowest priority will be called
 
 async function getWorldBossLatest() {
-  const worldBossUser = await twitterClient.v1.userTimelineByUsername(
-    "game8_d4boss"
+  const worldBossUser = await twitterClient.v2.usersByUsernames(
+    "game8_d4boss",{
+      "tweet.fields": "created_at",
+    }
   );
-  const fetchedTweets = worldBossUser.tweets
-  return fetchedTweets
+  const mostRecentTweet = worldBossUser.includes.tweets[0].text;
+  return mostRecentTweet
 }
 
 framework.hears(
