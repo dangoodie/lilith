@@ -117,7 +117,7 @@ async function getWorldBossLatest() {
     const jsonData = await response.json;
     console.log(jsonData);
     const tweetText =
-      jsonData.data.user.result.timeline_v2.timeline.instructions[1].entries[0]
+      jsonData.data.data.user.result.timeline_v2.timeline.instructions[1].entries[0]
         .content.itemContent.tweet_results.result.legacy.full_text;
 
     return tweetText;
