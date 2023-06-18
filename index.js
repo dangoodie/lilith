@@ -79,43 +79,51 @@ framework.on("log", (msg) => {
 // was specified, in which case, only the handler(s) with the lowest priority will be called
 
 async function getWorldBossLatest() {
-  const response = await fetch(
-    "https://twitter.com/i/api/graphql/Uuw5X2n3tuGE_SatnXUqLA/UserTweets?variables=%7B%22userId%22%3A%221665642971629486080%22%2C%22count%22%3A20%2C%22includePromotedContent%22%3Atrue%2C%22withQuickPromoteEligibilityTweetFields%22%3Atrue%2C%22withVoice%22%3Atrue%2C%22withV2Timeline%22%3Atrue%7D&features=%7B%22rweb_lists_timeline_redesign_enabled%22%3Atrue%2C%22responsive_web_graphql_exclude_directive_enabled%22%3Atrue%2C%22verified_phone_label_enabled%22%3Afalse%2C%22creator_subscriptions_tweet_preview_api_enabled%22%3Atrue%2C%22responsive_web_graphql_timeline_navigation_enabled%22%3Atrue%2C%22responsive_web_graphql_skip_user_profile_image_extensions_enabled%22%3Afalse%2C%22tweetypie_unmention_optimization_enabled%22%3Atrue%2C%22responsive_web_edit_tweet_api_enabled%22%3Atrue%2C%22graphql_is_translatable_rweb_tweet_is_translatable_enabled%22%3Atrue%2C%22view_counts_everywhere_api_enabled%22%3Atrue%2C%22longform_notetweets_consumption_enabled%22%3Atrue%2C%22tweet_awards_web_tipping_enabled%22%3Afalse%2C%22freedom_of_speech_not_reach_fetch_enabled%22%3Atrue%2C%22standardized_nudges_misinfo%22%3Atrue%2C%22tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled%22%3Afalse%2C%22longform_notetweets_rich_text_read_enabled%22%3Atrue%2C%22longform_notetweets_inline_media_enabled%22%3Atrue%2C%22responsive_web_enhance_cards_enabled%22%3Afalse%7D",
-    {
-      headers: {
-        accept: "*/*",
-        "accept-language": "en-US,en;q=0.9",
-        authorization:
-          "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA",
-        "content-type": "application/json",
-        "sec-ch-ua":
-          '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"Linux"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "x-client-uuid": "c662dce3-6b22-4311-b874-c3ac3cb0d485",
-        "x-csrf-token":
-          "30b19f1c2acc2c2fbc883f414d1bd8db1b3df3c71be66dd111ca64cf2a0f4c28f33ad7036b053c993196ee094e5f45f382716a70326575f4cb0ab9dcd7650dcc54d1743b1864a63b737923b6715f69ef",
-        "x-twitter-active-user": "yes",
-        "x-twitter-auth-type": "OAuth2Session",
-        "x-twitter-client-language": "en",
-        cookie:
-          'guest_id=v1%3A164171758419877796; _ga=GA1.2.449319703.1641717585; kdt=uHpjcJbQ9MBMFs0UqUh0SKLClqogfYxR3XBJe2yH; auth_token=94cd0a8f7a6048309a218775ef5da0efc7761b8f; ct0=30b19f1c2acc2c2fbc883f414d1bd8db1b3df3c71be66dd111ca64cf2a0f4c28f33ad7036b053c993196ee094e5f45f382716a70326575f4cb0ab9dcd7650dcc54d1743b1864a63b737923b6715f69ef; twid=u%3D3013217426; guest_id_ads=v1%3A164171758419877796; guest_id_marketing=v1%3A164171758419877796; des_opt_in=Y; lang=en; at_check=true; _gid=GA1.2.1938451349.1687087625; mbox=session#566ecfe5968d404ca3b60ee59a169070#1687089948; personalization_id="v1_GpkSS26U58NraaX4vELDwA=="; external_referer=padhuUp37zjgzgv1mFWxJ12Ozwit7owX|0|8e8t2xd8A2w%3D',
-        Referer: "https://twitter.com/game8_d4boss",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
-      },
-      body: null,
-      method: "GET",
+  try {
+    const response = await fetch(
+      "https://twitter.com/i/api/graphql/Uuw5X2n3tuGE_SatnXUqLA/UserTweets?variables=%7B%22userId%22%3A%221665642971629486080%22%2C%22count%22%3A20%2C%22includePromotedContent%22%3Atrue%2C%22withQuickPromoteEligibilityTweetFields%22%3Atrue%2C%22withVoice%22%3Atrue%2C%22withV2Timeline%22%3Atrue%7D&features=%7B%22rweb_lists_timeline_redesign_enabled%22%3Atrue%2C%22responsive_web_graphql_exclude_directive_enabled%22%3Atrue%2C%22verified_phone_label_enabled%22%3Afalse%2C%22creator_subscriptions_tweet_preview_api_enabled%22%3Atrue%2C%22responsive_web_graphql_timeline_navigation_enabled%22%3Atrue%2C%22responsive_web_graphql_skip_user_profile_image_extensions_enabled%22%3Afalse%2C%22tweetypie_unmention_optimization_enabled%22%3Atrue%2C%22responsive_web_edit_tweet_api_enabled%22%3Atrue%2C%22graphql_is_translatable_rweb_tweet_is_translatable_enabled%22%3Atrue%2C%22view_counts_everywhere_api_enabled%22%3Atrue%2C%22longform_notetweets_consumption_enabled%22%3Atrue%2C%22tweet_awards_web_tipping_enabled%22%3Afalse%2C%22freedom_of_speech_not_reach_fetch_enabled%22%3Atrue%2C%22standardized_nudges_misinfo%22%3Atrue%2C%22tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled%22%3Afalse%2C%22longform_notetweets_rich_text_read_enabled%22%3Atrue%2C%22longform_notetweets_inline_media_enabled%22%3Atrue%2C%22responsive_web_enhance_cards_enabled%22%3Afalse%7D",
+      {
+        headers: {
+          accept: "*/*",
+          "accept-language": "en-US,en;q=0.9",
+          authorization:
+            "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA",
+          "content-type": "application/json",
+          "sec-ch-ua":
+            '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": '"Linux"',
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "same-origin",
+          "x-client-uuid": "c662dce3-6b22-4311-b874-c3ac3cb0d485",
+          "x-csrf-token":
+            "30b19f1c2acc2c2fbc883f414d1bd8db1b3df3c71be66dd111ca64cf2a0f4c28f33ad7036b053c993196ee094e5f45f382716a70326575f4cb0ab9dcd7650dcc54d1743b1864a63b737923b6715f69ef",
+          "x-twitter-active-user": "yes",
+          "x-twitter-auth-type": "OAuth2Session",
+          "x-twitter-client-language": "en",
+          cookie:
+            'guest_id=v1%3A164171758419877796; _ga=GA1.2.449319703.1641717585; kdt=uHpjcJbQ9MBMFs0UqUh0SKLClqogfYxR3XBJe2yH; auth_token=94cd0a8f7a6048309a218775ef5da0efc7761b8f; ct0=30b19f1c2acc2c2fbc883f414d1bd8db1b3df3c71be66dd111ca64cf2a0f4c28f33ad7036b053c993196ee094e5f45f382716a70326575f4cb0ab9dcd7650dcc54d1743b1864a63b737923b6715f69ef; twid=u%3D3013217426; guest_id_ads=v1%3A164171758419877796; guest_id_marketing=v1%3A164171758419877796; des_opt_in=Y; lang=en; at_check=true; _gid=GA1.2.1938451349.1687087625; mbox=session#566ecfe5968d404ca3b60ee59a169070#1687089948; personalization_id="v1_GpkSS26U58NraaX4vELDwA=="; external_referer=padhuUp37zjgzgv1mFWxJ12Ozwit7owX|0|8e8t2xd8A2w%3D',
+          Referer: "https://twitter.com/game8_d4boss",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+        },
+        body: null,
+        method: "GET",
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  );
-  const jsonData = response.json;
-  const tweetText =
-    jsonData.data.user.result.timeline_v2.timeline.instructions[1].entries[0]
-      .content.itemContent.tweet_results.result.legacy.full_text;
+    const jsonData = await response.json;
+    console.log(jsonData);
+    const tweetText =
+      jsonData.data.user.result.timeline_v2.timeline.instructions[1].entries[0]
+        .content.itemContent.tweet_results.result.legacy.full_text;
 
-  return tweetText;
+    return tweetText;
+  } catch (err) {
+    console.error(error);
+  }
 }
 
 framework.hears(
