@@ -78,39 +78,16 @@ framework.on("log", (msg) => {
 // specifies priority.   If multiple handlers match they will all be called unless the priority
 // was specified, in which case, only the handler(s) with the lowest priority will be called
 
-/* On mention with command
-ex User enters @botname framework, the bot will write back in markdown
-*/
 framework.hears(
-  "framework",
+  "world boss",
   (bot) => {
-    console.log("framework command received");
-    bot.say(
-      "markdown",
-      "The primary purpose for the [webex-node-bot-framework](https://github.com/jpjpjp/webex-node-bot-framework) was to create a framework based on the [webex-jssdk](https://webex.github.io/webex-js-sdk) which continues to be supported as new features and functionality are added to Webex. This version of the project was designed with two themes in mind: \n\n\n * Mimimize Webex API Calls. The original flint could be quite slow as it attempted to provide bot developers rich details about the space, membership, message and message author. This version eliminates some of that data in the interests of efficiency, (but provides convenience methods to enable bot developers to get this information if it is required)\n * Leverage native Webex data types. The original flint would copy details from the webex objects such as message and person into various flint objects. This version simply attaches the native Webex objects. This increases the framework's efficiency and makes it future proof as new attributes are added to the various webex DTOs "
-    );
+    console.log("worldboss command received");
+    bot.say("Getting most up to date world boss timers");
   },
-  "**framework**: (learn more about the Webex Bot Framework)",
+  "**world boss**: (get the most upt to date world boss info)",
   0
 );
 
-/* On mention with command, using other trigger data, can use lite markdown formatting
-ex User enters @botname 'info' phrase, the bot will provide personal details
-*/
-framework.hears(
-  "info",
-  (bot, trigger) => {
-    console.log("info command received");
-    //the "trigger" parameter gives you access to data about the user who entered the command
-    let personAvatar = trigger.person.avatar;
-    let personEmail = trigger.person.emails[0];
-    let personDisplayName = trigger.person.displayName;
-    let outputString = `Here is your personal information: \n\n\n **Name:** ${personDisplayName}  \n\n\n **Email:** ${personEmail} \n\n\n **Avatar URL:** ${personAvatar}`;
-    bot.say("markdown", outputString);
-  },
-  "**info**: (get your personal details)",
-  0
-);
 
 /* On mention with bot data 
 ex User enters @botname 'space' phrase, the bot will provide details about that particular space
@@ -139,33 +116,6 @@ framework.hears(
    This demonstrates how developers can access the webex
    sdk to call any Webex API.  API Doc: https://webex.github.io/webex-js-sdk/api/
 */
-framework.hears(
-  "say hi to everyone",
-  (bot) => {
-    console.log("say hi to everyone.  Its a party");
-    // Use the webex SDK to get the list of users in this space
-    bot.webex.memberships
-      .list({ roomId: bot.room.id })
-      .then((memberships) => {
-        for (const member of memberships.items) {
-          if (member.personId === bot.person.id) {
-            // Skip myself!
-            continue;
-          }
-          let displayName = member.personDisplayName
-            ? member.personDisplayName
-            : member.personEmail;
-          bot.say(`Hello ${displayName}`);
-        }
-      })
-      .catch((e) => {
-        console.error(`Call to sdk.memberships.get() failed: ${e.messages}`);
-        bot.say("Hello everybody!");
-      });
-  },
-  "**say hi to everyone**: (everyone gets a greeting using a call to the Webex SDK)",
-  0
-);
 
 // Buttons & Cards data
 let cardJSON = {
@@ -232,27 +182,6 @@ framework.hears(
   0
 );
 
-/* On mention reply example
-ex User enters @botname 'reply' phrase, the bot will post a threaded reply
-*/
-framework.hears(
-  "reply",
-  (bot, trigger) => {
-    console.log("someone asked for a reply.  We will give them two.");
-    bot.reply(
-      trigger.message,
-      "This is threaded reply sent using the `bot.reply()` method.",
-      "markdown"
-    );
-    var msg_attach = {
-      text: "This is also threaded reply with an attachment sent via bot.reply(): ",
-      file: "https://media2.giphy.com/media/dTJd5ygpxkzWo/giphy-downsized-medium.gif",
-    };
-    bot.reply(trigger.message, msg_attach);
-  },
-  "**reply**: (have bot reply to your message)",
-  0
-);
 
 /* On mention with command
 ex User enters @botname help, the bot will write back in markdown
@@ -268,6 +197,7 @@ framework.hears(
       .say(`Hello ${trigger.person.displayName}.`)
       //    .then(() => sendHelp(bot))
       .then(() => bot.say("markdown", framework.showHelp()))
+      .then(() => bot.say(`Lilith has been hacked together by Daniel Gooden -\nhttps://www.github.com/dangoodie`))
       .catch((e) => console.error(`Problem in help hander: ${e.message}`));
   },
   "**help**: (what you are reading now)",
