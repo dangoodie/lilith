@@ -2,7 +2,7 @@
 require("dotenv").config();
 var framework = require("webex-node-bot-framework");
 var webhook = require("webex-node-bot-framework/webhook");
-const { TwitterAPI } = require("twitter-api-v2");
+const { TwitterApi } = require("twitter-api-v2");
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
@@ -15,10 +15,12 @@ const config = {
   port: process.env.PORT,
 };
 
-const twitterClient = new TwitterAPI({
+const twitterClient = new TwitterApi({
   appKey: process.env.TWITTER_API_KEY,
   appSecret: process.env.TWITTER_API_SECRET,
 });
+
+const readTweets = twitterClient.readOnly;
 
 // init framework
 var framework = new framework(config);
@@ -86,7 +88,7 @@ framework.on("log", (msg) => {
 // was specified, in which case, only the handler(s) with the lowest priority will be called
 
 async function getWorldBossLatest() {
-  const worldBossUser = await twitterClient.v1.userTimelineByUsername(
+  const worldBossUser = await readTweets.v1.userTimelineByUsername(
     "game8_d4boss"
   );
   const fetchedTweets = worldBossUser.tweets
