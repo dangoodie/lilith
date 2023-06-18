@@ -1,12 +1,12 @@
 //Webex Bot Starter - featuring the webex-node-bot-framework - https://www.npmjs.com/package/webex-node-bot-framework
 require("dotenv").config();
-const framework = require("webex-node-bot-framework");
-const webhook = require("webex-node-bot-framework/webhook");
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
-const fetch = require("node-fetch");
-const fs = require("fs");
+var framework = require("webex-node-bot-framework");
+var webhook = require("webex-node-bot-framework/webhook");
+var express = require("express");
+var bodyParser = require("body-parser");
+var app = express();
+var fetch = require("node-fetch");
+var fs = require("fs");
 app.use(bodyParser.json());
 app.use(express.static("images"));
 const config = {
