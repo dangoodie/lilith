@@ -18,9 +18,9 @@ const config = {
 const twitterClient = new TwitterApi({
   appKey: process.env.TWITTER_API_KEY,
   appSecret: process.env.TWITTER_API_SECRET,
+  accessToken: process.env.TWITTER_ACCESS_TOKEN,
+  accessSecret: process.env.TWITTER_ACCESS_SECRET,
 });
-
-const readTweets = twitterClient.readOnly;
 
 // init framework
 var framework = new framework(config);
@@ -88,7 +88,7 @@ framework.on("log", (msg) => {
 // was specified, in which case, only the handler(s) with the lowest priority will be called
 
 async function getWorldBossLatest() {
-  const worldBossUser = await readTweets.v1.userTimelineByUsername(
+  const worldBossUser = await twitterClient.v1.userTimelineByUsername(
     "game8_d4boss"
   );
   const fetchedTweets = worldBossUser.tweets
