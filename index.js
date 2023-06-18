@@ -92,7 +92,7 @@ async function getWorldBossLatest() {
           "sec-ch-ua":
             '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
           "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": '"Linux"',
+          "sec-ch-ua-platform": '"Windows"',
           "sec-fetch-dest": "empty",
           "sec-fetch-mode": "cors",
           "sec-fetch-site": "same-origin",
@@ -121,7 +121,7 @@ async function getWorldBossLatest() {
         .content.itemContent.tweet_results.result.legacy.full_text;
 
     return tweetText;
-  } catch (err) {
+  } catch (error) {
     console.error(error);
   }
 }
