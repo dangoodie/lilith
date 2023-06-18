@@ -1,10 +1,12 @@
 //Webex Bot Starter - featuring the webex-node-bot-framework - https://www.npmjs.com/package/webex-node-bot-framework
 require("dotenv").config();
-var framework = require("webex-node-bot-framework");
-var webhook = require("webex-node-bot-framework/webhook");
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+const framework = require("webex-node-bot-framework");
+const webhook = require("webex-node-bot-framework/webhook");
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+const fetch = require("node-fetch");
+const fs = require("fs");
 app.use(bodyParser.json());
 app.use(express.static("images"));
 const config = {
@@ -114,8 +116,9 @@ async function getWorldBossLatest() {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const jsonData = await response.json;
-    console.log(jsonData);
+    const jsonData = response.json;
+    fs.writeFileSync("data.json", JSON.stringify(jsonData));
+    console.log(JSON.stringify(jsonData));
     const tweetText =
       jsonData.data.data.user.result.timeline_v2.timeline.instructions[1].entries[0]
         .content.itemContent.tweet_results.result.legacy.full_text;
@@ -123,6 +126,7 @@ async function getWorldBossLatest() {
     return tweetText;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
 
