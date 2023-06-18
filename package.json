@@ -1,14 +1,14 @@
 {
-  "name": "lillith",
+  "name": "lilith",
   "version": "1.0.0",
   "description": "A webex bot for delivering Diablo 4 content to you",
   "main": "index.js",
   "scripts": {
-    "start": "npm install && node --use_strict lillith.js"
+    "start": "node --use_strict index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dangoodie/lillith.git"
+    "url": "git+https://github.com/dangoodie/lilith.git"
   },
   "keywords": [
     "Cisco",
