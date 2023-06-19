@@ -14,7 +14,6 @@ git
 ## Prerequisites:
 
 - [ ] node.js (minimum supported v8.0.0 & npm 2.14.12 and up)
-
 - [ ] [Sign up for Webex Developer Account](https://developer.webex.com/signup)
 
 ---
@@ -22,15 +21,10 @@ git
 ## Steps to get the bot working
 
 1. Create a Webex bot (save the API access token and username): https://developer.webex.com/my-apps/new/bot
-
 2. Sign up for nGrok, then connect and start it on your machine (save the port number and public web address): https://ngrok.com/download
-
 3. After installing ngrok, run it on your local machine to get a public ip address, eg `ngrok http 3000 --region=eu`
-
 4. Copy the ip address displayed in the ngrok window, ie: : https://1234.eu.ngrok.io
-
 5. Copy the `.env.local` file to a file called `.env`
-
 6. Edit `.env` with the following values:
 
 - BOTTOKEN - Set this to the token for your bot that you got in step 1
@@ -38,7 +32,16 @@ git
 - WEBHOOKURL - Set this to the ip address that you copied in step 4
 
 5. Turn on your bot server with `npm start`
-
 6. Create a space in Webex
-
 7. Add the bot (by its username) to the space in Webex
+
+---
+
+
+
+## API Endpoints
+
+* https://diablo4.life/api/trackers/worldBoss/list
+* https://diablo4.life/api/trackers/zoneEvent/list
+* https://diablo4.life/api/trackers/helltide/list
+* https://diablo4.life/api/trackers/worldBoss/upcomming
