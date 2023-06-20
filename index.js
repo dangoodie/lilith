@@ -85,11 +85,11 @@ async function getWorldBoss() {
   const worldBossList = await fetch(worldBossListUrl, { method: "GET" });
   const worldBossListJson = await worldBossList.json();
 
-  if (worldBossListJson.event.confidence.name != "") {
+  if (String(worldBossListJson.event.confidence.name) != "") {
     return {
-      name: worldBossListJson.event.confidence.name,
+      name: String(worldBossListJson.event.confidence.name),
       time: new Date(worldBossListJson.event.confidence.time),
-      location: worldBossListJson.event.confidence.location,
+      location: String(worldBossListJson.event.confidence.location),
       eventFound: true,
     };
   }
@@ -99,9 +99,9 @@ async function getWorldBoss() {
   const lastEventLocation = worldBossListJson.lastEvent.location;
 
   return {
-    name: lastEventName,
+    name: String(lastEventName),
     time: new Date(lastEventTime),
-    location: lastEventLocation,
+    location: String(lastEventLocation),
     eventFound: false,
   };
 }
@@ -128,10 +128,7 @@ framework.hears(
 
       let outputString = "Event found! \n\n";
 
-      const name = worldBoss.name.valueOf();
-      const location = worldBoss.location.valueOf();
-
-      outputString += `${name} is spawning at ${location} in`;
+      outputString += `${worldBoss.name} is spawning at ${worldBoss.location} in`;
       if (time.hours > 0) {
         outputString += `${time.hours} hours`;
       }
