@@ -101,7 +101,7 @@ framework.hears(
     bot.say("Getting most up to date world boss timers");
     const nextWorldBoss = await getWorldBossUpcoming();
     console.log("Found next world boss: ", nextWorldBoss);
-    bot.say(nextWorldBoss);
+    bot.say(`The next world boss is ${nextWorldBoss}`);
   },
   "**world boss**: (get the most upt to date world boss info)",
   0
