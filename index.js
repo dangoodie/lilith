@@ -5,7 +5,7 @@ var webhook = require("webex-node-bot-framework/webhook");
 var express = require("express");
 var bodyParser = require("body-parser");
 const fetch = require("node-fetch");
-import datefns from 'date-fns';
+const datefns = require("date-fns");
 var app = express();
 app.use(bodyParser.json());
 app.use(express.static("images"));
@@ -135,7 +135,7 @@ framework.hears(
     console.log("Name: ", worldBoss.name);
     console.log("Location: ", worldBoss.location);
     console.log("Time: ", worldBoss.time);
-    const now = new Date()
+    const now = new Date();
     console.log("Time now", now);
     console.log("EventFound: ", worldBoss.eventFound);
 
