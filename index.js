@@ -134,6 +134,7 @@ framework.hears(
     console.log("Name: ", worldBoss.name);
     console.log("Location: ", worldBoss.location);
     console.log("Time: ", worldBoss.time);
+    console.log("Time now", new Time());
     console.log("EventFound: ", worldBoss.eventFound);
 
     if (worldBoss.eventFound) {
