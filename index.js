@@ -85,7 +85,7 @@ async function getWorldBoss() {
   const worldBossList = await fetch(worldBossListUrl, { method: "GET" });
   const worldBossListJson = await worldBossList.json();
 
-  if (worldBossListJson.event.confidence.name) {
+  if (worldBossListJson.event.confidence.name != "") {
     return {
       name: worldBossListJson.event.confidence.name,
       time: new Date(worldBossListJson.event.confidence.time),
@@ -120,14 +120,18 @@ framework.hears(
   "world boss",
   async (bot) => {
     console.log("worldboss command received");
-    bot.say("Getting most up to date world boss timers");
+    bot.say("Checking if there is a world boss spawned.");
     const worldBoss = await getWorldBoss();
 
     if (worldBoss.eventFound) {
       const time = formatTime(worldBoss.time);
 
       let outputString = "Event found! \n\n";
-      outputString += `${worldBoss.name} is spawning at ${worldBoss.location} in`;
+
+      const name = worldBoss.name.valueOf();
+      const location = worldBoss.location.valueOf();
+
+      outputString += `${name} is spawning at ${location} in`;
       if (time.hours > 0) {
         outputString += `${time.hours} hours`;
       }
