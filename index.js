@@ -85,7 +85,7 @@ async function getWorldBoss() {
   const worldBossList = await fetch(worldBossListUrl, { method: "GET" });
   const worldBossListJson = await worldBossList.json();
 
-  if (String(worldBossListJson.event.confidence.name) != "") {
+  if (String(worldBossListJson.event.confidence.name) != {}) {
     console.log("Event found!");
     console.log("Name: ", worldBossListJson.event.confidence.name);
     console.log("Time: ", worldBossListJson.event.confidence.time);
