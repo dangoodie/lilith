@@ -134,7 +134,8 @@ framework.hears(
     console.log("Name: ", worldBoss.name);
     console.log("Location: ", worldBoss.location);
     console.log("Time: ", worldBoss.time);
-    console.log("Time now", new Time());
+    const now = new Date()
+    console.log("Time now", now);
     console.log("EventFound: ", worldBoss.eventFound);
 
     if (worldBoss.eventFound) {
@@ -158,7 +159,6 @@ framework.hears(
       bot.say(outputString);
     } else {
       let outputString = "No event found. \n\n";
-      const now = new Date();
       const timeDiff = now - worldBoss.time;
       const time = formatTime(timeDiff);
 
