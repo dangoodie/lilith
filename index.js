@@ -86,6 +86,11 @@ async function getWorldBoss() {
   const worldBossListJson = await worldBossList.json();
 
   if (String(worldBossListJson.event.confidence.name) != "") {
+    console.log("Event found!");
+    console.log("Name: ", worldBossListJson.event.confidence.name);
+    console.log("Time: ", worldBossListJson.event.confidence.time);
+    console.log("Location: ", worldBossListJson.event.confidence.location);
+
     return {
       name: String(worldBossListJson.event.confidence.name),
       time: new Date(worldBossListJson.event.confidence.time),
@@ -97,6 +102,10 @@ async function getWorldBoss() {
   const lastEventName = worldBossListJson.lastEvent.name;
   const lastEventTime = worldBossListJson.lastEvent.time;
   const lastEventLocation = worldBossListJson.lastEvent.location;
+
+  console.log("Last Event Name: ", lastEventName);
+  console.log("Last Event Time: ", lastEventTime);
+  console.log("Last Event Location: ", lastEventLocation);
 
   return {
     name: String(lastEventName),
@@ -123,7 +132,7 @@ framework.hears(
     bot.say("Checking if there is a world boss spawned.");
     const worldBoss = await getWorldBoss();
     console.log("Name: ", worldBoss.name);
-    console.log("Location: ", worldBoss.location)
+    console.log("Location: ", worldBoss.location);
     console.log("Time: ", worldBoss.time);
     console.log("EventFound: ", worldBoss.eventFound);
 
