@@ -87,8 +87,9 @@ async function getWorldBossUpcoming() {
 
   const response = await fetch(url, options)
     .then((res) => res.json())
-    .then((json) => console.log(json))
+    .then((json) => JSON.parse(response))
     .catch((err) => console.error("error:" + err));
+
 
   return response.nextSpawn;
 }
