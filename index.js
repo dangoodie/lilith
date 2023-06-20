@@ -145,10 +145,10 @@ framework.hears(
 
       outputString += `${name} is spawning at ${location} in`;
       if (time.hours > 0) {
-        outputString += `${time.hours} hours`;
+        outputString += `${time.hours} hours `;
       }
       if (time.minutes > 0) {
-        outputString += `${time.minutes} minutes`;
+        outputString += `${time.minutes} minutes `;
       }
       if (time.seconds > 0) {
         outputString += `${time.seconds} seconds`;
@@ -161,18 +161,15 @@ framework.hears(
       const timeDiff = now - worldBoss.time;
       const time = formatTime(timeDiff);
 
-      const name = worldBoss.name.valueOf();
-      const location = worldBoss.location.valueOf();
-
-      outputString += `${name} last spawned at ${location} `;
+      outputString += `${worldBoss.name} last spawned at ${worldBoss.location} `;
       if (time.hours > 0) {
-        outputString += `${time.hours} hours`;
+        outputString += `${time.hours} hours `;
       }
       if (time.minutes > 0) {
-        outputString += `${time.minutes} minutes`;
+        outputString += `${time.minutes} minutes `;
       }
       if (time.seconds > 0) {
-        outputString += `${time.seconds} seconds`;
+        outputString += `${time.seconds} seconds `;
       }
       outputString += " ago.";
       bot.say(outputString);
