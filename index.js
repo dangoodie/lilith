@@ -146,7 +146,10 @@ framework.hears(
       const timeDiff = now - worldBoss.time;
       const time = formatTime(timeDiff);
 
-      outputString += `${worldBoss.name} last spawned at ${worldBoss.location} `;
+      const name = worldBoss.name.valueOf();
+      const location = worldBoss.location.valueOf();
+
+      outputString += `${name} last spawned at ${location} `;
       if (time.hours > 0) {
         outputString += `${time.hours} hours`;
       }
