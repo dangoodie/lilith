@@ -99,7 +99,7 @@ framework.hears(
   async (bot) => {
     console.log("worldboss command received");
     bot.say("Getting most up to date world boss timers");
-    const nextWorldBoss = await getWorldBossUpmcoming();
+    const nextWorldBoss = await getWorldBossUpcoming();
     console.log("Found next world boss: ", nextWorldBoss);
     bot.say(nextWorldBoss);
   },
