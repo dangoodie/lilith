@@ -108,10 +108,15 @@ async function getWorldBoss() {
 
 function formatTime(date) {
   date = new Date(date);
+  
+  const hours = date.GetHours();
+  const minutes = date.GetMinutes();
+  const seconds = date.GetSeconds();
+
   return {
-    hours: date.GetHours(),
-    minutes: date.GetMinutes(),
-    seconds: date.GetSecondes(),
+    hours: hours,
+    minutes: minutes,
+    seconds: seconds,
   };
 }
 
