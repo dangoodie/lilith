@@ -5,6 +5,7 @@ var webhook = require("webex-node-bot-framework/webhook");
 var express = require("express");
 var bodyParser = require("body-parser");
 const fetch = require("node-fetch");
+import datefns from 'date-fns';
 var app = express();
 app.use(bodyParser.json());
 app.use(express.static("images"));
@@ -159,7 +160,7 @@ framework.hears(
       bot.say(outputString);
     } else {
       let outputString = "No event found. \n\n";
-      const timeDiff = now - worldBoss.time;
+      const timeDiff = now.getTime() - worldBoss.time.getTime();
       const time = formatTime(timeDiff);
 
       outputString += `${worldBoss.name} last spawned at ${worldBoss.location} `;
