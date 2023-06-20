@@ -80,14 +80,39 @@ framework.on("log", (msg) => {
 // specifies priority.   If multiple handlers match they will all be called unless the priority
 // was specified, in which case, only the handler(s) with the lowest priority will be called
 
-async function getWorldBossUpcoming() {
-  let url = "https://diablo4.life/api/trackers/worldBoss/upcomming";
+async function getWorldBoss() {
+  const worldBossListUrl = "https://diablo4.life/api/trackers/worldBoss/list";
+  const worldBossList = await fetch(worldBossListUrl, { method: "GET" });
+  const worldBossListJson = await worldBossList.json();
 
-  let options = { method: "GET" };
+  if (worldBossListJson.event.confidence.name) {
+    return {
+      name: worldBossListJson.event.confidence.name,
+      time: new Date(worldBossListJson.event.confidence.time),
+      location: worldBossListJson.event.confidence.location,
+      eventFound: true,
+    };
+  }
 
-  const response = await fetch(url, options);
-  const json = await response.json();
-  return json.nextSpawn;
+  const lastEventName = worldBossListJson.lastEvent.name;
+  const lastEventTime = worldBossListJson.lastEvent.time;
+  const lastEventLocation = worldBossListJson.lastEvent.location;
+
+  return {
+    name: lastEventName,
+    time: new Date(lastEventTime),
+    location: lastEventLocation,
+    eventFound: false,
+  };
+}
+
+function formatTime(date) {
+  date = new Date(date);
+  return {
+    hours: date.GetHours(),
+    minutes: date.GetMinutes(),
+    seconds: date.GetSecondes(),
+  };
 }
 
 framework.hears(
@@ -95,11 +120,45 @@ framework.hears(
   async (bot) => {
     console.log("worldboss command received");
     bot.say("Getting most up to date world boss timers");
-    const nextWorldBoss = await getWorldBossUpcoming();
-    console.log("Found next world boss: ", nextWorldBoss);
-    bot.say(`The next world boss is ${nextWorldBoss}`);
+    const worldBoss = await getWorldBoss();
+
+    if (worldBoss.eventFound) {
+      const time = formatTime(worldBoss.time);
+
+      let outputString = "Event found! \n\n";
+      outputString += `${worldboss.name} is spawning at ${worldboss.location} in`;
+      if (time.hours > 0) {
+        outputString += `${time.hours} hours`;
+      }
+      if (time.minutes > 0) {
+        outputString += `${time.minutes} minutes`;
+      }
+      if (time.seconds > 0) {
+        outputString += `${time.seconds} seconds`;
+      }
+      outputString += ".";
+      bot.say(outputString);
+    } else {
+      let outputString = "No event found. \n\n";
+      const now = new Date();
+      const timeDiff = now - worldBoss.time;
+      const time = formatTime(timeDiff);
+
+      outputString += `${worldboss.name} last spawned at ${worldboss.location} `;
+      if (time.hours > 0) {
+        outputString += `${time.hours} hours`;
+      }
+      if (time.minutes > 0) {
+        outputString += `${time.minutes} minutes`;
+      }
+      if (time.seconds > 0) {
+        outputString += `${time.seconds} seconds`;
+      }
+      outputString += " ago.";
+      bot.say(outputString);
+    }
   },
-  "**world boss**: (get the most upt to date world boss info)",
+  "**world boss**: (checks if a world boss is currently up)",
   0
 );
 
