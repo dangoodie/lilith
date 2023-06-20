@@ -90,7 +90,7 @@ async function getWorldBossUpcoming() {
     .then((json) => console.log(json))
     .catch((err) => console.error("error:" + err));
 
-  nextSpawn = response.nextSpawn;
+  const { nextSpawn } = response;
   return nextSpawn;
 }
 
