@@ -2,9 +2,9 @@
 require("dotenv").config();
 var framework = require("webex-node-bot-framework");
 var webhook = require("webex-node-bot-framework/webhook");
-const { TwitterApi } = require("twitter-api-v2");
 var express = require("express");
 var bodyParser = require("body-parser");
+const fetch = require("node-fetch");
 var app = express();
 app.use(bodyParser.json());
 app.use(express.static("images"));
@@ -14,13 +14,6 @@ const config = {
   token: process.env.BOTTOKEN,
   port: process.env.PORT,
 };
-
-const twitterClient = new TwitterApi({
-  appKey: process.env.TWITTER_API_KEY,
-  appSecret: process.env.TWITTER_API_SECRET,
-  accessToken: process.env.TWITTER_ACCESS_TOKEN,
-  accessSecret: process.env.TWITTER_ACCESS_SECRET,
-});
 
 // init framework
 var framework = new framework(config);
@@ -87,14 +80,18 @@ framework.on("log", (msg) => {
 // specifies priority.   If multiple handlers match they will all be called unless the priority
 // was specified, in which case, only the handler(s) with the lowest priority will be called
 
-async function getWorldBossLatest() {
-  const worldBossUser = await twitterClient.v2.usersByUsernames(
-    "game8_d4boss",{
-      "tweet.fields": "created_at",
-    }
-  );
-  const mostRecentTweet = worldBossUser.includes.tweets[0].text;
-  return mostRecentTweet
+async function getWorldBossUpcoming() {
+  let url = "https://diablo4.life/api/trackers/worldBoss/upcomming";
+
+  let options = { method: "GET" };
+
+  response = await fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+    .catch((err) => console.error("error:" + err));
+
+  nextSpawn = response.nextSpawn;
+  return nextSpawn;
 }
 
 framework.hears(
@@ -102,9 +99,9 @@ framework.hears(
   async (bot) => {
     console.log("worldboss command received");
     bot.say("Getting most up to date world boss timers");
-    const tweetText = await getWorldBossLatest();
-    console.log(tweetText);
-    // bot.say(tweetText);
+    const nextWorldBoss = await getWorldBossUpmcoming();
+    console.log("Found next world boss: ", nextWorldBoss);
+    bot.say(nextWorldBoss);
   },
   "**world boss**: (get the most upt to date world boss info)",
   0
