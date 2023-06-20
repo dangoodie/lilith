@@ -86,16 +86,16 @@ async function getWorldBoss() {
   const worldBossList = await fetch(worldBossListUrl, { method: "GET" });
   const worldBossListJson = await worldBossList.json();
 
-  if (worldBossListJson.event.confidence.name != "") {
+  if (worldBossListJson.event.hasOwnProperty("name")) {
     console.log("Event found!");
-    console.log("Name: ", worldBossListJson.event.confidence.name);
-    console.log("Time: ", worldBossListJson.event.confidence.time);
-    console.log("Location: ", worldBossListJson.event.confidence.location);
+    console.log("Name: ", worldBossListJson.event.name);
+    console.log("Time: ", worldBossListJson.event.time);
+    console.log("Location: ", worldBossListJson.event.location);
 
     return {
-      name: String(worldBossListJson.event.confidence.name),
-      time: new Date(worldBossListJson.event.confidence.time),
-      location: String(worldBossListJson.event.confidence.location),
+      name: String(worldBossListJson.event.name),
+      time: new Date(worldBossListJson.event.time),
+      location: String(worldBossListJson.event.location),
       eventFound: true,
     };
   }
