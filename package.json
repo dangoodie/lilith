@@ -24,6 +24,7 @@
   "homepage": "https://github.com/dangoodie/lillith/blob/main/README.md",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.0.3",
     "express": "^4.14.0",
     "webex-node-bot-framework": "^2.3.14"
