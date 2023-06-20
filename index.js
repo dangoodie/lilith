@@ -108,7 +108,7 @@ async function getWorldBoss() {
 
 function formatTime(date) {
   const d = new Date(date);
-  
+
   return {
     hours: d.getHours(),
     minutes: d.getMinutes(),
@@ -127,7 +127,7 @@ framework.hears(
       const time = formatTime(worldBoss.time);
 
       let outputString = "Event found! \n\n";
-      outputString += `${worldboss.name} is spawning at ${worldboss.location} in`;
+      outputString += `${worldBoss.name} is spawning at ${worldBoss.location} in`;
       if (time.hours > 0) {
         outputString += `${time.hours} hours`;
       }
@@ -145,7 +145,7 @@ framework.hears(
       const timeDiff = now - worldBoss.time;
       const time = formatTime(timeDiff);
 
-      outputString += `${worldboss.name} last spawned at ${worldboss.location} `;
+      outputString += `${worldBoss.name} last spawned at ${worldBoss.location} `;
       if (time.hours > 0) {
         outputString += `${time.hours} hours`;
       }
