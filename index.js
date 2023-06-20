@@ -122,13 +122,19 @@ framework.hears(
     console.log("worldboss command received");
     bot.say("Checking if there is a world boss spawned.");
     const worldBoss = await getWorldBoss();
+    console.log("Name: ", worldBoss.name);
+    console.log("Location: ", worldBoss.location)
+    console.log("Time: ", worldBoss.time);
+    console.log("EventFound: ", worldBoss.eventFound);
 
     if (worldBoss.eventFound) {
       const time = formatTime(worldBoss.time);
 
       let outputString = "Event found! \n\n";
+      const name = worldBoss.name.valueOf();
+      const location = worldBoss.location.valueOf();
 
-      outputString += `${worldBoss.name} is spawning at ${worldBoss.location} in`;
+      outputString += `${name} is spawning at ${location} in`;
       if (time.hours > 0) {
         outputString += `${time.hours} hours`;
       }
